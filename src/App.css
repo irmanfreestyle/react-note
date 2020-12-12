@@ -1,38 +1,308 @@
-.App {
+h1, h2, h3, h4 {
+  margin: 0px;
+}
+
+body {
+  font-family: 'Open Sans';
+  margin: 0px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.app-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100vh;
+}
+
+.app-container .sidebar {
+  min-width: 250px;
+  height: 100%;
+  background: #2979FF;
+  overflow: hidden;
+}
+
+.app-container .sidebar .sidebar-header {
+  height: 50px;
+  line-height: 50px;
+  padding: 0px 15px;
+  background: #2962FF;
+  color: white;
+  font-weight: bold;
+}
+
+.app-container .sidebar .sidebar-item {
+  font-weight: bold;
+  color: white;
+  width: 100%;
+  padding: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.app-container .sidebar .sidebar-item:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.app-container .sidebar .sidebar-item:active {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.app-container .sidebar .sidebar-item.label {
+  font-size: 13px !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.app-container .sidebar hr {
+  width: 80% !important;
+}
+
+.app-container .sidebar .dot {
+  width: 5px;
+  height: 5px;
+  background: orange;
+  border-radius: 100px;
+}
+
+.app-container .view {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.app-container .view .view-searchbar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background: white;
+  height: 50px;
+  padding: 0px 15px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.app-container .view .view-searchbar input {
+  border: none;
+  outline: none;
+}
+
+.app-container .view .view-searchbar input:focus {
+  border: none !important;
+}
+
+.app-container .view .view-container {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 20px 50px;
+  width: 100%;
+}
+
+.app-container .view .view-container .mini-label-container {
+  padding-bottom: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.app-container .view .view-container .mini-label-container .add-note-btn {
+  background: transparent;
+  border: none;
+  color: #2979FF;
+  font-size: 14px;
+  outline: none !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: 1px solid #2979FF;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.app-container .view .view-container .mini-label-container .add-note-btn:hover {
+  cursor: pointer;
+}
+
+.main-page {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.note-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 180px;
+  max-width: 100%;
+  padding: 20px;
+  margin: 7px;
+  margin-bottom: 20px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.19), 0 1px 2px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.19), 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.note-card .card-date {
+  font-weight: bold;
+  font-size: 10px;
+  color: grey;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.note-card .card-title {
+  padding: 8px 0px;
+  font-weight: bold;
+  height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.note-card .card-content {
+  font-size: 12px;
+  height: 65px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+.note-card .card-labels {
+  padding: 10px 0px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.chip {
+  display: inline-block;
+  color: white;
+  background: #2979FF;
+  margin: 0px 2px 2px 2px;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 3px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.create-note-overlay {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 10;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.create-note-overlay .form-card {
+  padding: 15px;
+  background: white;
+  border-radius: 5px;
+  width: 500px;
+  max-width: 100%;
+}
+
+.create-note-overlay .form-card input[type=text], .create-note-overlay .form-card textarea {
+  width: 100%;
+  margin: 10px 0px;
+  -webkit-box-sizing: border-box !important;
+          box-sizing: border-box !important;
+  padding: 5px 10px;
+}
+
+button {
+  outline: none;
+  border: none;
+  padding: 8px 15px;
   color: white;
+  border-radius: 3px;
 }
 
-.App-link {
-  color: #61dafb;
+button:hover {
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button:active {
+  -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
+          box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
 }
+
+button.btn-main {
+  background: #2979FF;
+}
+
+button.btn-danger {
+  background: #F50057;
+}
+
+button.btn-icon {
+  background: transparent;
+  color: black;
+  padding: 0px;
+}
+/*# sourceMappingURL=App.css.map */
