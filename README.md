@@ -1,6 +1,7 @@
 ## About Project
 Just a simple notes app built with React & a little sass
 
+---------------------------------------------------------
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
