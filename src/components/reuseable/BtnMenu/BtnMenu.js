@@ -9,8 +9,10 @@ export default function BtnMenu({children}) {
     <>
       <div
         className={styles.activator}
-        onClick={() => setMenus(!showMenus)}
-        onBlur={() => setMenus(false)}
+        onClick={(e) => {
+          e.stopPropagation()
+          setMenus(!showMenus)
+        }}
       >
         <Icon>more_horiz</Icon>
         {

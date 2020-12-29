@@ -5,13 +5,15 @@ import BtnMenu from './reuseable/BtnMenu/BtnMenu'
 import {useDispatch} from 'react-redux'
 import { deleteNote, showCreate } from '../actions/noteActions';
 import ConfirmModal from './slots/ModalSlot';
-import Icon from '../components/Icon'
+import Icon from '../components/Icon';
+import DetailNoteView from './DetailNoteView';
 
 export default function Card(props) {
   let {note} = props;
   let dispatch = useDispatch();
+  let [viewNoteModal, setViewNoteModal] = useState(false);
   let toDate = (timeStamp) => {
-    return moment.unix(timeStamp).format('DD MMMM YYYY . HH:MM');
+    return moment.unix(timeStamp).format('DD MMMM YYYY . HH:mm');
   };
 
   let [deleteModal, setDeleteModal] = useState(false);
@@ -43,6 +45,15 @@ export default function Card(props) {
     )
   };
 
+  let DetailNoteModal = () => {
+    return !viewNoteModal ? '' : (
+      <DetailNoteView
+        note={note}
+        close={() => setViewNoteModal(false)}
+      />
+    )
+  };
+
   let confirmDelete = () => {
     dispatch(deleteNote(note.title))
   };
@@ -50,8 +61,9 @@ export default function Card(props) {
   return (
     <>
       <ConfirmModalComponent />
+      <DetailNoteModal />
 
-      <div className="note-card">
+      <div className="note-card" onClick={() => setViewNoteModal(true)}>
         {
           !note.pinned ? '' : (
             <div

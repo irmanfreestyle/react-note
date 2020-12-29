@@ -2,80 +2,89 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {showCreate, createNote} from '../actions/noteActions';
 import moment from 'moment';
+import {uid} from 'uid';
 
 export default function CreateNote () {
   let [title, setTitle] = useState('');
   let [labels, setLabels] = useState('');
   let [content, setContent] = useState('');
   let [pinned, setPinned] = useState('');
+  let [createdAt, setCreatedAt] = useState('');
+  let [uidNote, setUid] = useState('');
 
+  const isEdit = useSelector(state => state.notes.isEdit);
   let dispatch = useDispatch();
 
   let addNote = () => {
     let payload = {
+      uid: isEdit ? uidNote : uid(10),
       title,
       labels: labels.split(',').map(item => item.trim()),
       content,
       pinned,
-      createdAt: moment().format('X')
+      createdAt: !isEdit ? moment().format('X') : createdAt,
+      updatedAt: isEdit ? moment().format('X') : '',
+      isEdit
     };
 
     dispatch(createNote(payload));
     dispatch(showCreate(false));
   }
 
-  const isEdit = useSelector(state => state.notes.isEdit);
   const editData = useSelector(state => state.notes.selectedNote);
-  function initAction (setTitle) {
+  function initAction () {
     if (isEdit) {
-      // let {
-      //   title,
-      //   labels,
-      //   content,
-      //   pinned
-      // } = editData;
+      let {
+        uid,
+        title,
+        labels,
+        content,
+        pinned,
+        createdAt
+      } = editData;
 
-      // console.log(title)
-
-      setTitle(editData.title);
-      // setLabels(editData.labels);
-      // setContent(editData.content);
-      // setPinned(editData.pinned);
-      console.log('IS EDIT')
-    } else {
-      console.log('IS CREATE')
+      setUid(uid);
+      setTitle(title);
+      setLabels(labels.join(','));
+      setContent(content);
+      setPinned(pinned);
+      setCreatedAt(createdAt);
     }
   };
 
   useEffect(() => {
-    initAction(setTitle);
-  });
+    initAction();
+  }, []);
 
   return (
     <div className="create-note-overlay">
       <div className="form-card">
-        <h3>Create a note</h3>
+        <h3>{isEdit ? 'Edit' : 'Create a'} note</h3>
         <br />
         <div className="form">
           <input
             type="text"
             placeholder="Title"
             onChange={(e) => setTitle(e.target.value)}
+            value={title}
           />
           <input
             type="text"
             placeholder="Label"
             onChange={(e) => setLabels(e.target.value)}
+            value={labels}
           />
           <textarea
             rows="5"
             placeholder="Write something here..."
             onChange={(e) => setContent(e.target.value)}
+            value={content}
           ></textarea>
           <input
             type="checkbox"
             id="pin"
             onChange={(e) => setPinned(e.target.checked)}
+            checked={pinned}
           />
           <label htmlFor="pin">
             Pin this note
@@ -87,7 +96,7 @@ export default function CreateNote () {
               className="btn-main"
               onClick={addNote}
             >
-              Create
+              {isEdit ? 'Update note' : 'Create note'}
             </button>
           </div>
         </div>

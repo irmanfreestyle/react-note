@@ -18,9 +18,17 @@ const noteReducer = (state = initialState, action) => {
       return state;
 
     case actions.CREATE_NOTE:
+      let {isEdit, uid} = action.payload
+
+      if (isEdit) {
+        let index = state.notes.findIndex(note => note.uid === uid);
+        state.notes.splice(index, 1)
+      }
+
       state.notes.unshift(action.payload);
 
       let noteData = JSON.stringify(state.notes);
+
       localStorage.setItem('react-note', noteData);
       return state;
 
