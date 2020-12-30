@@ -1,8 +1,9 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import Card from '../components/Card';
-
+import NoContent from '../components/reuseable/NoContent';
 import {useParams} from "react-router-dom";
+import Chip from '../components/Chip';
 
 export default function Label() {
   const notes = useSelector(state => state.notes.notes);
@@ -18,6 +19,16 @@ export default function Label() {
     )
   }
 
+  let LabelContent = () => {
+    return (
+      <div
+        className="text-center"
+      >
+        There are no notes on the <Chip>{label}</Chip> label
+      </div>
+    )
+  };
+
   return (
     <>
       <div className="main-page">
@@ -27,6 +38,13 @@ export default function Label() {
           ))
         }
       </div>
+      {
+        filterNotes(notes).length ? '' : (
+          <NoContent
+            label={<LabelContent />}
+          />
+        )
+      }
     </>
   )
 }

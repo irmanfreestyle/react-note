@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {showCreate, createNote} from '../actions/noteActions';
+import CreateModal from './slots/ModalSlot';
 import moment from 'moment';
 import {uid} from 'uid';
 
@@ -56,51 +57,55 @@ export default function CreateNote () {
     initAction();
   }, []);
 
-  return (
-    <div className="create-note-overlay">
-      <div className="form-card">
-        <h3>{isEdit ? 'Edit' : 'Create a'} note</h3>
-        <br />
-        <div className="form">
-          <input
-            type="text"
-            placeholder="Title"
-            onChange={(e) => setTitle(e.target.value)}
-            value={title}
-          />
-          <input
-            type="text"
-            placeholder="Label"
-            onChange={(e) => setLabels(e.target.value)}
-            value={labels}
-          />
-          <textarea
-            rows="5"
-            placeholder="Write something here..."
-            onChange={(e) => setContent(e.target.value)}
-            value={content}
-          ></textarea>
-          <input
-            type="checkbox"
-            id="pin"
-            onChange={(e) => setPinned(e.target.checked)}
-            checked={pinned}
-          />
-          <label htmlFor="pin">
-            Pin this note
-          </label>
-          <br /> <br/>
-          <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-            <button className="btn-danger" onClick={() => dispatch(showCreate(false))}>Cancel</button> &nbsp;
-            <button
-              className="btn-main"
-              onClick={addNote}
-            >
-              {isEdit ? 'Update note' : 'Create note'}
-            </button>
-          </div>
-        </div>
+  let Action = () => {
+    return (
+      <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+        <button className="btn-danger" onClick={() => dispatch(showCreate(false))}>Cancel</button> &nbsp;
+        <button
+          className="btn-main"
+          onClick={addNote}
+        >
+          {isEdit ? 'Update note' : 'Create note'}
+        </button>
       </div>
-    </div>
+    )
+  }
+
+  return (
+    <CreateModal
+      header={<h3 className="text-center">{isEdit ? 'Edit' : 'Create a'} note</h3>}
+      content={
+        <>
+        <input
+          type="text"
+          placeholder="Title"
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
+        />
+        <input
+          type="text"
+          placeholder="Label"
+          onChange={(e) => setLabels(e.target.value)}
+          value={labels}
+        />
+        <textarea
+          rows="5"
+          placeholder="Write something here..."
+          onChange={(e) => setContent(e.target.value)}
+          value={content}
+        ></textarea>
+        <input
+          type="checkbox"
+          id="pin"
+          onChange={(e) => setPinned(e.target.checked)}
+          checked={pinned}
+        />
+        <label htmlFor="pin">
+          Pin this note
+        </label>
+        </>
+      }
+      actions={<Action />}
+    />
   )
 }

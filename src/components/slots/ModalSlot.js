@@ -1,14 +1,18 @@
 import React from 'react';
+import styles from './ModalSlot.module.scss'
 
-export default function ConfirmModal({header, actions, content}) {
+export default function ModalSlot({header, actions, content, width}) {
   return (
-    <div className="create-note-overlay">
+    <div className={styles.modalOverlay}>
       <div
-        className="form-card"
+        className={styles.cardContent}
+        style={{
+          width: width || '500px'
+        }}
       >
         {header}
         <br />
-        <div className="form">
+        <div>
           <div
             style={{
               maxHeight: '400px',

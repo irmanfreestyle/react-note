@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {showCreateLabel, createLabel} from '../actions/noteActions'
+import CreateModal from './slots/ModalSlot';
 import moment from 'moment';
 
 export default function CreateLabel () {
@@ -18,18 +19,19 @@ export default function CreateLabel () {
   };
 
   return (
-    <div className="create-note-overlay">
-      <div className="form-card">
-        <h3>Create new label</h3>
-        <br />
-        <div className="form">
-          <input
-            type="text"
-            placeholder="Title"
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </div>
-        <br /> <br/>
+    <CreateModal
+      width="300px"
+      header={
+        <h3 className="text-center">Create new label</h3>
+      }
+      content={
+        <input
+          type="text"
+          placeholder="Title"
+          onChange={(e) => setTitle(e.target.value)}
+        />
+      }
+      actions={
         <div style={{display: 'flex', justifyContent: 'flex-end'}}>
           <button className="btn-danger" onClick={() => dispatch(showCreateLabel(false))}>Cancel</button> &nbsp;
           <button
@@ -39,7 +41,7 @@ export default function CreateLabel () {
             Create
           </button>
         </div>
-      </div>
-    </div>
+      }
+    />
   );
 }
