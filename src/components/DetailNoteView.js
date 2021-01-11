@@ -17,6 +17,11 @@ export default function DetailNoteView(props) {
     updatedAt
   } = props.note;
 
+  function createMarkup(el) {
+    let result = el.replace(/\r?\n/g, '<br />');
+    return {__html: result};
+  }
+
   let Content = () => {
     return (
       <>
@@ -26,7 +31,7 @@ export default function DetailNoteView(props) {
             minHeight: '100px'
           }}
         >
-          {content}
+          <div dangerouslySetInnerHTML={createMarkup(content)} />
         </div>
       </>
     )
