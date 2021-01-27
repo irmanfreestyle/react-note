@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {showCreate, createNote} from '../actions/noteActions';
 import CreateModal from './slots/ModalSlot';
+import Alert from './slots/ModalSlot';
 import moment from 'moment';
 import {uid} from 'uid';
 
@@ -28,8 +29,12 @@ export default function CreateNote () {
       isEdit
     };
 
-    dispatch(createNote(payload));
-    dispatch(showCreate(false));
+    if (!title.trim() || !labels.trim() || !content.trim()) {
+      return false
+    } else {
+      dispatch(createNote(payload));
+      dispatch(showCreate(false));
+    }
   }
 
   const editData = useSelector(state => state.notes.selectedNote);

@@ -14,8 +14,12 @@ export default function CreateLabel () {
       createdAt: moment().format('X')
     };
 
-    dispatch(createLabel(payload));
-    dispatch(showCreateLabel(false));
+    if (!title.trim()) {
+      return false;
+    } else {
+      dispatch(createLabel(payload));
+      dispatch(showCreateLabel(false));
+    }
   };
 
   return (

@@ -10,6 +10,10 @@ $secondary-color: #2962FF;
   -webkit-box-orient: vertical;
 }
 
+.red--text {
+  color: $danger-color;
+}
+
 h1, h2, h3, h4 {
   margin: 0px;
 }
