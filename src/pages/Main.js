@@ -38,7 +38,7 @@ function Main() {
             }}
           ></img>
           <h3>
-            {day}, {date + 1} {month} {year}
+            {day}, {date} {month} {year}
           </h3>
           <div>
             Let's take some notes
