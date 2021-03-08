@@ -1,5 +1,5 @@
 ## About Project
-Just a simple notes app built with React & a little sass
+Just a simple notes app built with React & little sass
 
 ---------------------------------------------------------
 
