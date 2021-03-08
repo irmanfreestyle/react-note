@@ -7,7 +7,8 @@ let initialState = {
   notes: [],
   labels: [],
   searchKeyword: '',
-  selectedNote: {}
+  selectedNote: {},
+  alert: false
 }
 
 const noteReducer = (state = initialState, action) => {
@@ -53,13 +54,23 @@ const noteReducer = (state = initialState, action) => {
 
     case actions.SHOW_CREATE_LABEL:
       state.modalCreateLabel = action.payload;
+      state.alert = false
       return state;
 
     case actions.CREATE_LABEL:
-      state.labels.unshift(action.payload)
+      let labelIsExist = state.labels.find(item => item.title === action.payload.title);
 
-      let labelData = JSON.stringify(state.labels)
-      localStorage.setItem('react-note-label', labelData)
+      if (!labelIsExist) {
+        state.labels.unshift(action.payload)
+
+        let labelData = JSON.stringify(state.labels)
+        localStorage.setItem('react-note-label', labelData)
+
+        state.modalCreateLabel = false
+      } else {
+        state.alert = true
+      }
+
       return state;
 
     case actions.GET_LABELS:
@@ -86,6 +97,11 @@ const noteReducer = (state = initialState, action) => {
 
       localStorage.setItem('react-note', JSON.stringify(state.notes));
       localStorage.setItem('react-note-label', JSON.stringify(state.labels));
+
+      return state;
+
+    case actions.SET_ALERT:
+      state.alert = action.payload
 
       return state;
 

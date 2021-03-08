@@ -13,9 +13,9 @@ export default function CreateNote () {
   let [pinned, setPinned] = useState('');
   let [createdAt, setCreatedAt] = useState('');
   let [uidNote, setUid] = useState('');
-
-  const isEdit = useSelector(state => state.notes.isEdit);
+  let isEdit = useSelector(state => state.notes.isEdit);
   let dispatch = useDispatch();
+  let createdLabels = useSelector(state => state.notes.labels)
 
   let addNote = () => {
     let payload = {
@@ -38,6 +38,7 @@ export default function CreateNote () {
   }
 
   const editData = useSelector(state => state.notes.selectedNote);
+
   function initAction () {
     if (isEdit) {
       let {
@@ -57,6 +58,10 @@ export default function CreateNote () {
       setCreatedAt(createdAt);
     }
   };
+
+  function onSelectLabels () {
+    console.log(createdLabels)
+  }
 
   useEffect(() => {
     initAction();
@@ -92,6 +97,7 @@ export default function CreateNote () {
           placeholder="Label"
           onChange={(e) => setLabels(e.target.value)}
           value={labels}
+          onClick={onSelectLabels}
         />
         <textarea
           rows="5"
