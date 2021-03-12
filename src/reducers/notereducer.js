@@ -1,4 +1,5 @@
 import * as actions from '../actions/noteActions'
+import {useDispatch} from 'react-redux'
 
 let initialState = {
   modalCreate: false,
@@ -8,7 +9,9 @@ let initialState = {
   labels: [],
   searchKeyword: '',
   selectedNote: {},
-  alert: false
+  alert: false,
+  alertType: '',
+  alertText: ''
 }
 
 const noteReducer = (state = initialState, action) => {
@@ -54,7 +57,6 @@ const noteReducer = (state = initialState, action) => {
 
     case actions.SHOW_CREATE_LABEL:
       state.modalCreateLabel = action.payload;
-      state.alert = false
       return state;
 
     case actions.CREATE_LABEL:
@@ -69,6 +71,8 @@ const noteReducer = (state = initialState, action) => {
         state.modalCreateLabel = false
       } else {
         state.alert = true
+        state.alertType = 'danger'
+        state.alertText = 'Label name is exist'
       }
 
       return state;
@@ -101,7 +105,9 @@ const noteReducer = (state = initialState, action) => {
       return state;
 
     case actions.SET_ALERT:
-      state.alert = action.payload
+      state.alert = action.payload.status
+      state.alertText = action.payload.alertText
+      state.alertType = action.payload.alertType
 
       return state;
 

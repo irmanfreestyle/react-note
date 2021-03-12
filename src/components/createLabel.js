@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {showCreateLabel, createLabel} from '../actions/noteActions'
 import CreateModal from './slots/ModalSlot';
-import Alert from './reuseable/Alert'
 import moment from 'moment';
 
 export default function CreateLabel () {
@@ -24,10 +23,6 @@ export default function CreateLabel () {
 
   return (
     <>
-      <Alert
-        text="Label name is exist"
-        type="error"
-      />
       <CreateModal
         width="300px"
         header={

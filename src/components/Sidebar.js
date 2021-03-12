@@ -3,7 +3,7 @@ import Icon from '../components/Icon';
 import {Link} from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import {deleteLabel, initNotes, showCreateLabel} from '../actions/noteActions';
+import {deleteLabel, initNotes, showCreateLabel, setAlert} from '../actions/noteActions';
 import {menus} from '../dummy';
 import ConfirmModal from './slots/ModalSlot';
 import styles from '../scssModules/sidebar.module.scss'
@@ -31,6 +31,11 @@ export default function Sidebar() {
             dispatch(deleteLabel(labelTitle));
             setDeleteModal(false);
             dispatch(initNotes());
+            dispatch(setAlert({
+              status: true,
+              alertType: 'success',
+              alertText: 'Label deleted'
+            }))
           }}
         >
           Yes, delete it
