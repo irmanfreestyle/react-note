@@ -1,6 +1,7 @@
 @import "../App.scss";
 
 .sidebar {
+    transition: 0.3s;
     min-width: 250px;
     height: 100%;
     background: $main-color;
@@ -68,5 +69,48 @@
       height: 5px;
       background: orange;
       border-radius: 100px;
+    }
+  }
+
+  .sidebarMobile {
+    @media screen and (max-width: 835px) {
+      position: fixed;
+      left: -250px;
+      top: 0;
+      bottom: 0;
+      z-index: 99;
+    }
+  }
+
+  .openSidebar {
+    left: 0px !important;
+  }
+
+  .sidebarOverlay {
+    position: fixed;
+    background: rgba(0,0,0,0.3);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 98;
+  }
+
+  .closeSidebarButton {
+    float: right;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    border-radius: 0px 0px 0px 15px;
+    border: 2px solid white;
+    transition: 0.3s;
+
+    &:hover {
+      cursor: pointer;
+      background: transparent;
+      color: red;
     }
   }

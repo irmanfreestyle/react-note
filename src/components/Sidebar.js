@@ -3,7 +3,7 @@ import Icon from '../components/Icon';
 import {Link} from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import {deleteLabel, initNotes, showCreateLabel, setAlert} from '../actions/noteActions';
+import {deleteLabel, initNotes, showCreateLabel, setAlert, setMobile} from '../actions/noteActions';
 import {menus} from '../dummy';
 import ConfirmModal from './slots/ModalSlot';
 import styles from '../scssModules/sidebar.module.scss'
@@ -11,8 +11,9 @@ import styles from '../scssModules/sidebar.module.scss'
 export default function Sidebar() {
   const history = useHistory();
   const dispatch = useDispatch();
-  const labels = useSelector(state => state.notes.labels);
-  let [labelTitle, setLabelTitle] = useState('');
+  const labels = useSelector(state => state.notes.labels)
+  let isMobile = useSelector(state => state.notes.isMobile)
+  let [labelTitle, setLabelTitle] = useState('')
 
   let [deleteModal, setDeleteModal] = useState(false);
   let DeleteActions = () => {
@@ -52,20 +53,33 @@ export default function Sidebar() {
     )
   };
 
+  const detectMobile = () => {
+    if (window.innerWidth <= 835) {
+      dispatch(setMobile(true))
+    } else {
+      dispatch(setMobile(false))
+    }
+  }
+
   useEffect(() => {
-    // return history.listen((location) => {
-    //   console.log(location)
-    // })
+    detectMobile()
+
     window.addEventListener('resize', function() {
-      console.log(window.innerWidth)
+      detectMobile()
     })
-  })
+  }, [])
 
   return (
     <>
       <ConfirmModalComponent />
 
-      <div className={styles.sidebar}>
+      {
+        window.innerWidth > 835 || isMobile ? '' : (
+          <div className={styles.sidebarOverlay} onClick={() => dispatch(setMobile(true))} />
+        )
+      }
+
+      <div className={`${styles.sidebar} ${styles.sidebarMobile} ${!isMobile ? styles.openSidebar : ''}`}>
         <div className={styles.sidebarHeader}>
           REACT NOTE
         </div>

@@ -11,7 +11,8 @@ let initialState = {
   selectedNote: {},
   alert: false,
   alertType: '',
-  alertText: ''
+  alertText: '',
+  isMobile: false,
 }
 
 const noteReducer = (state = initialState, action) => {
@@ -113,6 +114,10 @@ const noteReducer = (state = initialState, action) => {
 
     case actions.SEARCH_NOTES:
       state.searchKeyword = action.payload.trim();
+      return state;
+
+    case actions.SET_MOBILE:
+      state.isMobile = action.payload;
       return state;
 
     default:

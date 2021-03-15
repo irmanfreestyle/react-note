@@ -10,6 +10,7 @@ export const GET_LABELS = 'GET_LABELS';
 export const DELETE_NOTE = 'DELETE_NOTE';
 export const DELETE_LABEL = 'DELETE_LABEL';
 export const SET_ALERT = 'SET_ALERT';
+export const SET_MOBILE = 'SET_MOBILE';
 
 export const initNotes = () => {
   let notes = localStorage.getItem('react-note');
@@ -66,5 +67,10 @@ export const deleteLabel = payload => ({
 
 export const setAlert = payload => ({
   type: SET_ALERT,
+  payload
+});
+
+export const setMobile = payload => ({
+  type: SET_MOBILE,
   payload
 });
